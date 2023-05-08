@@ -294,18 +294,25 @@ def read_news_content(file):
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
-    news_content = read_news_content("Interventional neuroradiology.html")
-    return render_template('newsletter.html', title='Newsletter', news_content=news_content)
+    subject = "Interventional neuroradiology"
+    news_content = read_news_content(subject + '.html')
+    return render_template('newsletter.html', title='INRUpdate.com', news_content=news_content)
 
 @app.route('/dentistry', methods = ['POST', 'GET'])
 def index():
-    news_content = read_news_content("Dentistry.html")
-    return render_template('newsletter.html', title='Newsletter', news_content=news_content)
+    subject = "Dentistry"
+    news_content = read_news_content(subject + '.html')
+    return render_template('newsletter.html', title='Dentistry', news_content=news_content)
 
-@app.route('/newsletter', methods = ['POST', 'GET'])
-def newsletter():
-    news_content = read_news_content()
-    #return news_content
+@app.route('/dermatology', methods = ['POST', 'GET'])
+def index():
+    subject = "Dermatology"
+    news_content = read_news_content(subject + '.html')
+    return render_template('newsletter.html', title='Dermatology', news_content=news_content)
+
+@app.route('/AI', methods = ['POST', 'GET'])
+def index():
+    news_content = read_news_content("Artifical intelligence in radiology.html")
     return render_template('newsletter.html', title='Newsletter', news_content=news_content)
 
 @app.route('/app-page', methods = ['POST', 'GET'])
