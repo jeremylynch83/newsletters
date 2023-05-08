@@ -288,7 +288,7 @@ def radreport_get_template():
 def read_news_content(file):
     data_folder = os.path.join(app.root_path, 'data')
     news_content = ""
-    with open(os.path.join(data_folder, 'Interventional neuroradiology.html'), 'r') as file:
+    with open(os.path.join(data_folder, file), 'r') as file:
         news_content = file.read()
     return news_content
 
@@ -299,19 +299,19 @@ def index():
     return render_template('newsletter.html', title='INRUpdate.com', news_content=news_content)
 
 @app.route('/dentistry', methods = ['POST', 'GET'])
-def index():
+def dentistry():
     subject = "Dentistry"
     news_content = read_news_content(subject + '.html')
     return render_template('newsletter.html', title='Dentistry', news_content=news_content)
 
 @app.route('/dermatology', methods = ['POST', 'GET'])
-def index():
+def dermatology():
     subject = "Dermatology"
     news_content = read_news_content(subject + '.html')
     return render_template('newsletter.html', title='Dermatology', news_content=news_content)
 
 @app.route('/AI', methods = ['POST', 'GET'])
-def index():
+def ai():
     news_content = read_news_content("Artifical intelligence in radiology.html")
     return render_template('newsletter.html', title='Newsletter', news_content=news_content)
 
