@@ -312,7 +312,7 @@ def user():
 def read_news_content():
     data_folder = os.path.join(app.root_path, 'data')
     news_content = ""
-    with open(os.path.join(data_folder, 'news.html'), 'r') as file:
+    with open(os.path.join(data_folder, 'Interventional neuroradiology.html'), 'r') as file:
         news_content = file.read()
     return news_content
 
