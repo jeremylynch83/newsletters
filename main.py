@@ -285,10 +285,21 @@ def radreport_get_template():
             }
     return jsonify(data)
 
+def read_news_content(file):
+    data_folder = os.path.join(app.root_path, 'data')
+    news_content = ""
+    with open(os.path.join(data_folder, 'Interventional neuroradiology.html'), 'r') as file:
+        news_content = file.read()
+    return news_content
+
 @app.route('/', methods = ['POST', 'GET'])
 def index():
-    news_content = read_news_content()
-    #return news_content
+    news_content = read_news_content("Interventional neuroradiology.html")
+    return render_template('newsletter.html', title='Newsletter', news_content=news_content)
+
+@app.route('/dentistry', methods = ['POST', 'GET'])
+def index():
+    news_content = read_news_content("Dentistry.html")
     return render_template('newsletter.html', title='Newsletter', news_content=news_content)
 
 @app.route('/newsletter', methods = ['POST', 'GET'])
@@ -309,12 +320,7 @@ def store():
 def user():
     return render_template('user.html', title='radiologytemplates.org')
 
-def read_news_content():
-    data_folder = os.path.join(app.root_path, 'data')
-    news_content = ""
-    with open(os.path.join(data_folder, 'Interventional neuroradiology.html'), 'r') as file:
-        news_content = file.read()
-    return news_content
+
 
 
 
