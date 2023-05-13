@@ -132,11 +132,10 @@
             text-align: left;
         }
         .show {
-            display: block;
+            display: block !important; 
         }
         .hide {
-            display: none;
-
+            display: none !important;
         }
 
         .dropdown-content a:hover {
@@ -219,7 +218,6 @@
     // Dropdown menu
     function toggleDropdown(id) {
         document.getElementById(id).classList.toggle('show');
-        document.getElementById(id).classList.toggle('hide');
 
     }
 
