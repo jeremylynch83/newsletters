@@ -15,7 +15,6 @@
             line-height: 1.6;
             background: #f8f9fa;
             color: #333;
-            cursor: pointer;
         }
 
         header {
@@ -135,6 +134,10 @@
         .show {
             display: block;
         }
+        .hide {
+            display: none;
+
+        }
 
         .dropdown-content a:hover {
             background-color: #f1f1f1;
@@ -213,14 +216,13 @@
 <body>
 
     <script>
-<script>
     // Dropdown menu
     function toggleDropdown(id) {
         document.getElementById(id).classList.toggle('show');
     }
 
-    // Close the dropdown menu if the user clicks or taps outside of it
-    function closeDropdowns(event) {
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
@@ -228,16 +230,13 @@
                 var openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
+                    document.getElementById(id).classList.toggle('hide');
                 }
             }
         }
     }
 
-    // Attach the event listener to both click and touchstart events
-    window.addEventListener('click', closeDropdowns);
-    window.addEventListener('touchstart', closeDropdowns);
-
-    // When the user clicks or taps on the button, open the modal
+    // When the user clicks on the button, open the modal
     function openModal(modalId) {
         document.getElementById(modalId).style.display = "block";
     }
@@ -245,8 +244,6 @@
     function closeModal(modalId) {
         document.getElementById(modalId).style.display = "none";
     }
-</script>
-
     </script>
 
 
