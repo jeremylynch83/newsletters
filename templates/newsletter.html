@@ -219,6 +219,8 @@
     // Dropdown menu
     function toggleDropdown(id) {
         document.getElementById(id).classList.toggle('show');
+        document.getElementById(id).classList.toggle('hide');
+
     }
 
     // Close the dropdown menu if the user clicks outside of it
@@ -230,7 +232,7 @@
                 var openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
-                    document.getElementById(id).classList.toggle('hide');
+                    openDropdown.classList.toggle('hide');
                 }
             }
         }
