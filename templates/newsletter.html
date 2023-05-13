@@ -15,6 +15,7 @@
             line-height: 1.6;
             background: #f8f9fa;
             color: #333;
+            cursor: pointer;
         }
 
         header {
@@ -212,33 +213,33 @@
 <body>
 
     <script>
-        // Dropdown menu
-        function toggleDropdown(id) {
-            document.getElementById(id).classList.toggle('show');
-        }
+    // Dropdown menu
+    function toggleDropdown(id) {
+        document.getElementById(id).classList.toggle('show');
+    }
 
-        // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
                 }
             }
         }
+    }
 
-        // When the user clicks on the button, open the modal
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-        }
+    // When the user clicks on the button, open the modal
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
     </script>
 
 
@@ -259,8 +260,8 @@
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown('dropdownContent')"><i class="fas fa-newspaper"></i> News</a>
             <div class="dropdown-content" id="dropdownContent">
-                <a href="#"><i class="fas fa-tooth"></i> Dentistry</a>
-                <a href="/Dentistry"><i class="fas fa-x-ray"></i> Radiology</a>
+                <a href="/dentistry"><i class="fas fa-tooth"></i> Dentistry</a>
+                <a href="/"><i class="fas fa-x-ray"></i> Radiology</a>
             </div>
         </li>
     </ul>
