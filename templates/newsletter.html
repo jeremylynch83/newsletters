@@ -138,13 +138,13 @@
             display: none !important;
         }
 
-        .dropdown-content a:hover {
+        /*.dropdown-content a:hover {
             background-color: #f1f1f1;
         }
 
         .dropdown:hover .dropdown-content {
             display: block;
-        }
+        }*/
 
           /* The Modal (background) */
         .modal {
@@ -215,17 +215,19 @@
 <body>
 
     <script>
-    
+
     // Dropdown menu
     function toggleDropdown(id) {
         document.getElementById(id).classList.toggle('show');
+        document.getElementById(id).classList.remove('hide');
+
 
     }
 
     // Close the dropdown menu if the user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementById("dropdown-content");
+            var dropdowns = document.getElementById("dropdownContent");
             dropdowns.classList.remove('show');
             dropdowns.classList.toggle('hide');
         }
