@@ -57,6 +57,45 @@ def unique_id():
 login.init_app(app)
 login.login_view = 'login'
 
+
+def read_news_content(file):
+    data_folder = os.path.join(app.root_path, 'data')
+    news_content = ""
+    with open(os.path.join(data_folder, file), 'r') as file:
+        news_content = file.read()
+    return news_content
+
+@app.route('/', methods = ['POST', 'GET'])
+def index():
+    return render_template('index.html', menu=menu, big_menu=big_menu)
+
+@app.route("/<path:s>")
+def show_page(s):
+    subject = s.replace("_", " ")
+    if subject in subjects:
+        print(subject)
+        news_content = read_news_content(subject + '.html')
+        return render_template('newsletter.html', title=subject, news_content=news_content, menu=menu)
+
+    return f"Page not found {subjects}."
+
+
+if __name__ == '__main__':
+    
+    data_folder = os.path.join(app.root_path, 'data')
+    file_list = os.listdir(data_folder)
+
+    # Loop over the files
+    for file in file_list:
+        subject = os.path.splitext(file)[0]
+        subjects[subject] = "present"
+        menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
+        big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
+
+    print(subjects)
+    app.run()
+
+
 """
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -290,29 +329,6 @@ def radreport_get_template():
     return jsonify(data)
 """
 
-def read_news_content(file):
-    data_folder = os.path.join(app.root_path, 'data')
-    news_content = ""
-    with open(os.path.join(data_folder, file), 'r') as file:
-        news_content = file.read()
-    return news_content
-
-@app.route('/', methods = ['POST', 'GET'])
-def index():
-    #subject = "Interventional neuroradiology"
-    #news_content = read_news_content(subject + '.html')
-    return render_template('index.html', menu=menu, big_menu=big_menu)
-
-@app.route("/<path:s>")
-def show_page(s):
-    subject = s.replace("_", " ")
-    if subject in subjects:
-        print(subject)
-        news_content = read_news_content(subject + '.html')
-        return render_template('newsletter.html', title=subject, news_content=news_content, menu=menu)
-
-    return f"Page not found."
-
 
 """
 @app.route('/dentistry', methods = ['POST', 'GET'])
@@ -346,19 +362,7 @@ def user():
 """
 
 
-if __name__ == '__main__':
+
+
+
     
-    data_folder = os.path.join(app.root_path, 'data')
-    file_list = os.listdir(data_folder)
-
-    # Loop over the files
-    for file in file_list:
-        subject = os.path.splitext(file)[0]
-        subjects[subject] = "present"
-        menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
-        big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
-
-    print(subjects)
-
-
-    app.run()
