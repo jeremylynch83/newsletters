@@ -2,380 +2,370 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>radiologytemplates.org</title>
-    <link type="text/css" rel="stylesheet" href="%% url_for('static', filename='css/bootstrap.min.css')%%" />
-    <link type="text/css" rel="stylesheet" href="%% url_for('static', filename='css/intro.css')%%" />
-    <!-- Required scripts -->
-    <script>
-        fetch(`${window.origin}/check-login`, {
-                    method: "GET",
-                    credentials: "include",
-                    cache: "no-cache",
-                    headers: new Headers({
-                        "content-type": "application/json"
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Newsletter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #333;
+        }
 
-                    }
-                    if (response.status !== 200) {
-                        alert("Login failure " + response.status)
-                        
-                        return;
-                    }
-                    return response.json()
-                })
-                .then(xml => {
-                    //this.user_name = xml.username;
-                    //this.logged_in = true;
-                    window.location.href = "/app-page";
+        header {
+            padding: 20px 0;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-                })
-                .catch(function(error) {
-                    console.log("Fetch error: " + error);
-                });
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .news-content {
+            margin: 0 150px;
+            padding-bottom: 50px;
+
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid #444;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer .footer-column {
+            display: inline-block;
+            text-align: left;
+            margin: 0 2rem;
+        }
+
+        .footer .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1rem; /* Smaller font size */
+            font-weight: 700; /* Bolder font */
+        }
+
+        .footer .footer-column i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            text-align: center; /* Center the menu */ 
+
+        }
+
+        .nav-menu li {
+            display: inline; /* Align items in a row */
+        }
+
+        .nav-menu li a, .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav-menu li a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .nav-menu li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; /* Make sure it is in front */
+        }
+
+        .dropdown-content a {
+            display: none;
+            color: black !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .show {
+            display: block !important; 
+        }
+        .hide {
+            display: none !important;
+        }
+
+        /*.dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }*/
+
+          /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
 
 
-    </script>
-    <script src="%% url_for('static', filename='js/vue.js')%%"></script>
-    <script src="%% url_for('static', filename='js/bootstrap-vue.js')%%"></script>
-    <script src="%% url_for('static', filename='js/my_lib.js')%%"></script>
-    <script src="%% url_for('static', filename='js/validator.js')%%"></script>
+
+        .modal-header, .modal-footer {
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 20px;
+
+            align-items: stretch; /* Ensures all children items are the same height */
+        }
+
+        .section-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%; /* Ensure the box takes the full height of the grid item */
+        }
+
+        .section-box a {
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .section-box a:hover {
+            color: #007BFF;
+        }
+
+
+        @media screen and (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 10px;
+            }
+
+            .section-box {
+                padding: 10px;
+
+            }
+
+            .section-box a {
+                font-size: 16px;
+            }
+            
+            .news-content {
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+        }
+
+
+
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <b-navbar toggleable="lg" type="dark" variant="info" class="shadow p-3 mb-5">
-            <b-navbar-brand href="#">
-                <img src="%% url_for('static', filename='img/icon.svg')%%" height="15px" class="d-inline-block " alt="Kitten"></img>
-     
 
-            radiologytemplates.org</b-navbar-brand>
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-            <b-collapse id="nav-collapse" is-nav>
-                <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-form>
-                        <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-                    </b-nav-form>
-
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-        <div class="my_row">
-            <div class="my_col">
-                <div class="intro_text">
-                    <h1>Your radiology templates. Your way.</h1>
-                    <p>Reports generated are entirely confidential. No patient information leaves your computer.
-                        Reports are never shared or publicly accessible.
-                        No installation required. </p>
-                    <div>
-                        <b-card>
-                            <b-tabs content-class="mt-3">
-                                <b-tab title="Login" active>
-                                    <b-form id="login_form" @submit="onSubmit_login">
-                                        <fieldset>
-                                            <div class="field">
-                                                <p>Email
-                                                    <b-form-input v-model="user_email" required="required" id="email" name="email" type="email" />
-                                                </p>
-                                            </div>
-                                            <div class="field">
-                                                <p>Password
-                                                    <b-form-input type="password" v-model="user_password" />
-                                                </p>
-                                            </div>
-                                        </fieldset>
-                                        <b-button variant="success" type="submit" class="btn btn-primary">
-                                            Submit
-                                        </b-button>
-                                    </b-form>
-                                </b-tab>
-                                <b-tab title="Sign up">
-                                    <p>Register for free to start now! </p>
-                                    <b-form id="register_form" @submit="onSubmit_register">
-                                        <fieldset>
-                                            <p>Email
-                                                <b-form-input type="email" v-model="user_email" />
-                                            </p>
-                                            <p>Username
-                                                <b-form-input type="text" v-model="user_name_submit" />
-                                            </p>
-                                            <p>Password
-                                                <b-form-input type="password" v-model="user_password" />
-                                            </p>
-                                            <p>Repeat password
-                                                <b-form-input type="password" v-model="user_password_2" />
-                                            </p>
-                                            <b-button variant="success" type="submit">Submit</b-button>
-                                        </fieldset>
-                                    </b-form>
-                                </b-tab>
-                            </b-tabs>
-                        </b-card>
-                    </div>
-                </div>
-            </div>
-            <div class="my_col" id="banner_img_div">
-                <b-img fluid-grow class="banner_img" src="%% url_for('static', filename='img/banner3.jpg')%%" img-alt="Card Image" text-variant="white" title="TemplateReporting" />
-            </div>
-        </div>
-        <div class="intro_explain">
-            <div class="shadow p-3 mb-5 bg-white rounded">
-                <div class="explain_row">
-                    <div class="explain_col">
-                        <h2>Easy to use templates</h2>
-                        <p>Select commonly used report items to generate reports rapidly. Use checklists to ensure you do not miss important findings. </p>
-                    </div>
-                    <div class="explain_col">
-                        <div>
-                            <b-img fluid-grow src="%% url_for('static', filename='img/template_example.png')%%" img-alt="Card Image" text-variant="white" title="TemplateReporting" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="intro_explain">
-            <div class="shadow p-3 m
-            b-5 bg-white rounded">
-                <div class="explain_row">
-                    <div class="explain_col">
-                        <h2>Customisable</h2>
-                        <p>Exact wording of reports is very important to convey accurate information to clinicians. Templates are 100% customisable down to the wording used. Free text can be inserted anywhere in to reports. Brand new reports can be created to your specifications and modified templates can be saved for use at a later date. </p>
-                    </div>
-                    <div class="explain_col">
-                        <div>
-                            <b-img fluid-grow src="%% url_for('static', filename='img/edit_example.png')%%" img-alt="Card Image" text-variant="white" title="TemplateReporting" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="intro_explain">
-            <div class="shadow p-3 mb-5 bg-white rounded">
-                <div class="explain_row">
-                    <div class="explain_col">
-                        <h2>Generate reports in natural english</h2>
-                        <p>No checklists here. From just a few clicks reports generated are indistinguishable from dictated or typed text. </p>
-                    </div>
-                    <div class="explain_col">
-                        <div>
-                            <b-img fluid-grow src="%% url_for('static', filename='img/report_example.png')%%" img-alt="Card Image" text-variant="white" title="TemplateReporting" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="margin-left: 10%; margin-right: 10%; ">
-            <h1>Frequently asked questions</h1>
-            <template v-for="n in faq">
-                <b-card no-body>
-                    <b-card-header class="p-1" role="tab">
-                        <b-button variant="success" block v-b-toggle="'accordion-' + n.q">{{n.q}}</b-button>
-                    </b-card-header>
-                    <!--<b-collapse :id="'accordion-' + n.q" :accordion="'accordion-' + n.q" role="tabpanel">-->
-                        <b-card-body>
-                            <b-card-text>{{n.a}} </b-card-text>
-                        </b-card-body>
-                    <!--</b-collapse>-->
-                </b-card>
-            </template>
-            <p></p>
-        </div>
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <h6>About</h6>
-                        <p class="text-justify">Increase the speed and quality of your reports with radiologytemplates.org. Generate reports in natural language indistinguishable from written or dictated text. </p>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Categories</h6>
-                        <ul class="footer-links">
-                            <li><a href="">Medical certification</a></li>
-                            <li><a href="">Radiology</a></li>
-                            <li><a href="">Research</a></li>
-                            <li><a href="">Equal opportunities</a></li>
-                            <li><a href="">Training</a></li>
-                            <li><a href="">Work for us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Quick Links</h6>
-                        <ul class="footer-links">
-                            <li><a href="">About Us</a></li>
-                            <li><a href="">Contact Us</a></li>
-                            <li><a href="">Contribute</a></li>
-                            <li><a href="">Privacy Policy</a></li>
-                            <li><a href="">Sitemap</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
-                            <a href="#">Kinech</a>.
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-    </div>
-    </footer>
     <script>
-    /* GLOBAL VARIABLES */
 
-    window.app = new Vue({
-        components: {
-            //VueBootstrapTypeahead
-        },
-        el: '#app',
-        data: {
-
-            user_name: '',
-            user_name_submit: '',
-            user_email: '',
-            user_password: '',
-            user_password_2: '',
-            logged_in: false,
-            validator: new FormValidator({ "events": ['blur', 'paste', 'change'] }),
-            faq: [{
-                    q: "Templates can never replace the rich level of detail that writing can achieve?",
-                    a: "No. But for routine reports they can get you 90-100% of the way there. In complex reports templates can fill in the mundane details and the complexity can be written in text."
-                },
-                {
-                    q: "Isn't this all just for lazy people?",
-                    a: "Absolutely"
-                }
-            ]
-        },
-
-        created() {
-
-            var form = document.getElementById("login_form");
-
-            function handleForm(event) {
-                event.preventDefault();
-                this.login()
-            }
-            form.addEventListener('submit', handleForm);
+    // Dropdown menu
+    function toggleDropdown(id) {
+        document.getElementById(id).classList.toggle('show');
+        document.getElementById(id).classList.remove('hide');
 
 
+    }
 
-        },
-
-
-
-        methods: {
-            onSubmit_login(event) {
-                event.preventDefault();
-                this.login();
-            },
-            onSubmit_register(event) {
-                event.preventDefault();
-                this.register();
-            },
-
-
-            login: function() {
-
-                var validatorResult = this.validator.checkAll(document.getElementById("register_form"));
-
-                if (!!validatorResult.valid) {
-
-                    var entry = {
-                        user_email: this.user_email,
-                        user_password: this.user_password
-                    }
-
-                    fetch(`${window.origin}/login`, {
-                            method: "POST",
-                            credentials: "include",
-                            body: JSON.stringify(entry),
-                            cache: "no-cache",
-                            headers: new Headers({
-                                "content-type": "application/json"
-                            })
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = "/app-page";
-
-                            }
-                            if (response.status !== 200) {
-                                alert("Login failure " + response.status)
-                                return;
-                            }
-                            return response.json()
-                        })
-                        .catch(function(error) {
-                            console.log("Fetch error: " + error);
-                        });
-                }
-            },
-
-
-            register: function() {
-                if (this.user_password != this.user_password_2) {
-                    alert("Passwords must match!");
-                    return;
-                }
-                var validatorResult = this.validator.checkAll(document.getElementById("login_form"));
-                if (!!validatorResult.valid) {
-
-
-                    var entry = {
-                        user_email: this.user_email.toLowerCase(),
-                        user_password: this.user_password,
-                        user_name: toTitleCase(this.user_name_submit)
-                    }
-
-                    fetch(`${window.origin}/register`, {
-                            method: "POST",
-                            credentials: "include",
-                            body: JSON.stringify(entry),
-                            cache: "no-cache",
-                            headers: new Headers({
-                                "content-type": "application/json"
-                            })
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                alert("Registration success")
-                                window.location.reload(true)
-
-                            }
-                            if (response.status !== 200) {
-                                alert("Registration failure " + response.status)
-
-                                return;
-                            }
-                            return response
-                        })
-                        .catch(function(error) {
-                            console.log("Fetch error: " + error);
-                        });
-                }
-
-            }
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementById("dropdownContent");
+            dropdowns.classList.remove('show');
+            dropdowns.classList.toggle('hide');
         }
-    });
+    }
+
+    // When the user clicks on the button, open the modal
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
     </script>
+
+
+    <header>
+        <h1>
+            DrBulletin
+        </h1>
+        <h2>Research news updated daily</h2>
+    </header>
+
+
+    <ul class="nav-menu">
+        <li><a href="#about" onclick="openModal('myModal')"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown('dropdownContent')"><i class="fas fa-newspaper"></i> News</a>
+            <div class="dropdown-content" id="dropdownContent">
+                %% menu | safe %%
+            </div>
+        </li>
+    </ul>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Us</h2>
+            </div>
+            <div class="modal-body">
+                <p>Powered by advanced AI algorithms we fetch and summarise the most exceptional and groundbreaking new studies. Unlike traditional research platforms that rely on the prestige of journals we assess the inherent quality of research, independent of publication source. </p>
+            </div>
+            <div class="modal-footer">
+                <h3><button onclick="closeModal('myModal')">Close</button></h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="news-content">
+            
+            <div class="grid-container">
+                %% big_menu | safe %%
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-column">
+            <h4><i class="fas fa-building"></i> Company</h4>
+            <a href="#"><i class="fas fa-users"></i> Our Team</a>
+            <a href="#"><i class="fas fa-briefcase"></i> Careers</a>
+        </div>
+
+        <div class="footer-column">
+            <h4><i class="fas fa-hands-helping"></i> Support</h4>
+            <a href="#"><i class="fas fa-envelope"></i> Contact Us</a>
+            <a href="#"><i class="fas fa-question-circle"></i> Help Center</a>
+        </div>
+
+        <div class="footer-column">
+            <h4><i class="fas fa-gavel"></i> Legal</h4>
+            <a href="#"><i class="fas fa-user-secret"></i> Privacy Policy</a>
+            <a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a>
+        </div>
+
+        <p>Copyright 2023 Jeremy Lynch.</p>
+    </div>
 </body>
 
 </html>

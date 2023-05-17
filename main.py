@@ -33,6 +33,9 @@ first_request = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_templates.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+menu = ""
+big_menu = ""
+subjects = {}
 
 # Create the database file before the first user request itself
 @app.before_request
@@ -54,6 +57,7 @@ def unique_id():
 login.init_app(app)
 login.login_view = 'login'
 
+"""
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     print("login")
@@ -284,6 +288,7 @@ def radreport_get_template():
                 "template_version": req["template_version"]
             }
     return jsonify(data)
+"""
 
 def read_news_content(file):
     data_folder = os.path.join(app.root_path, 'data')
@@ -294,21 +299,33 @@ def read_news_content(file):
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
-    subject = "Interventional neuroradiology"
-    news_content = read_news_content(subject + '.html')
-    return render_template('newsletter.html', title='INRUpdate.com', news_content=news_content)
+    #subject = "Interventional neuroradiology"
+    #news_content = read_news_content(subject + '.html')
+    return render_template('index.html', menu=menu, big_menu=big_menu)
 
+@app.route("/<path:s>")
+def show_page(s):
+    subject = s.replace("_", " ")
+    if subject in subjects:
+        print(subject)
+        news_content = read_news_content(subject + '.html')
+        return render_template('newsletter.html', title=subject, news_content=news_content, menu=menu)
+
+    return f"Page not found."
+
+
+"""
 @app.route('/dentistry', methods = ['POST', 'GET'])
 def dentistry():
     subject = "Dentistry"
     news_content = read_news_content(subject + '.html')
-    return render_template('newsletter.html', title='Dentistry', news_content=news_content)
+    return render_template('newsletter.html', title='Dentistry', news_content=news_content, menu=menu)
 
 @app.route('/dermatology', methods = ['POST', 'GET'])
 def dermatology():
     subject = "Dermatology"
     news_content = read_news_content(subject + '.html')
-    return render_template('newsletter.html', title='Dermatology', news_content=news_content)
+    return render_template('newsletter.html', title='Dermatology', news_content=news_content, menu=menu)
 
 @app.route('/AI', methods = ['POST', 'GET'])
 def ai():
@@ -326,12 +343,22 @@ def store():
 @app.route('/user', methods = ['POST', 'GET'])
 def user():
     return render_template('user.html', title='radiologytemplates.org')
-
-
-
-
-
+"""
 
 
 if __name__ == '__main__':
+    
+    data_folder = os.path.join(app.root_path, 'data')
+    file_list = os.listdir(data_folder)
+
+    # Loop over the files
+    for file in file_list:
+        subject = os.path.splitext(file)[0]
+        subjects[subject] = "present"
+        menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
+        big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
+
+    print(subjects)
+
+
     app.run()
