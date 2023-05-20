@@ -4,7 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Newsletter</title>
+    <meta name="description" content="Stay updated with the latest medical research news tailored specifically for doctors and healthcare professionals.">
+    <meta name="keywords" content="Medical Research, Doctors, Healthcare, Medicine News, Health Studies">
+    <meta name="author" content="DrBulletin">
+    <meta property="og:title" content="DrBulletin.com | Your Resource for Medical Research News">
+    <meta property="og:description" content="Stay updated with the latest medical research news tailored specifically for doctors and healthcare professionals.">
+    <meta property="og:image" content="URL_TO_YOUR_LOGO">
+    <meta property="og:url" content="https://www.drbulletin.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>DrBulletin.com | Your Resource for Medical Research News</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
     <style>
@@ -25,13 +33,25 @@
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 500;
             margin-bottom: 10px;
+
+        }
+
+        .h1a {
+            font-size: 20px;
+            font-weight: 500;
+            padding: 0px;
+            border:0;
+
+            margin-top: 0px;
+
+            margin-bottom: 0px;
         }
 
         h2 {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 400;
             color: #777;
             margin-bottom: 20px;
@@ -302,7 +322,7 @@
 
     <header>
         <h1>
-            DrBulletin
+            <a href="/">DrBulletin</a>
         </h1>
         <h2>Research news updated daily</h2>
     </header>
@@ -311,7 +331,7 @@
     <ul class="nav-menu">
         <li><a href="#about" onclick="openModal('myModal')"><i class="fas fa-info-circle"></i> About</a></li>
         <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown('dropdownContent')"><i class="fas fa-newspaper"></i> News</a>
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown('dropdownContent')"><i class="fas fa-newspaper"></i> Categories</a>
             <div class="dropdown-content" id="dropdownContent">
                 %% menu | safe %%
             </div>

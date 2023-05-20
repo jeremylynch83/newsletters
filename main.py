@@ -6,6 +6,16 @@ import os
 import secrets
 from werkzeug.utils import secure_filename
 from bs4 import BeautifulSoup
+import logging
+
+# Create a custom logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler('log.txt')
+file_handler.setLevel(logging.DEBUG)
+log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') 
+file_handler.setFormatter(log_format) # Add the formatter to the file handler
+logger.addHandler(file_handler) # Add the file handler to the logger
 
 class CustomFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
@@ -36,6 +46,20 @@ db.init_app(app)
 menu = ""
 big_menu = ""
 subjects = {}
+
+
+# Set up the app stuff
+data_folder = os.path.join(app.root_path, 'data')
+file_list = os.listdir(data_folder)
+
+# Loop over the files
+for file in file_list:
+    subject = os.path.splitext(file)[0]
+    subjects[subject] = "present"
+    menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
+    big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
+
+#logger.info(data_folder)
 
 # Create the database file before the first user request itself
 @app.before_request
@@ -77,22 +101,11 @@ def show_page(s):
         news_content = read_news_content(subject + '.html')
         return render_template('newsletter.html', title=subject, news_content=news_content, menu=menu)
 
-    return f"Page not found {subjects}."
+    return f"Page not found {app.root_path}."
 
 
 if __name__ == '__main__':
-    
-    data_folder = os.path.join(app.root_path, 'data')
-    file_list = os.listdir(data_folder)
 
-    # Loop over the files
-    for file in file_list:
-        subject = os.path.splitext(file)[0]
-        subjects[subject] = "present"
-        menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
-        big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
-
-    print(subjects)
     app.run()
 
 

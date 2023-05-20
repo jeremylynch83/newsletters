@@ -1,0 +1,2 @@
+2023-05-17 19:50:02,654 - __main__ - INFO - /home/jeremy/Development/newsletters/data
+2023-05-17 19:52:45,701 - __main__ - INFO - /home/jeremy/Development/newsletters/data
