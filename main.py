@@ -1,6 +1,6 @@
 from flask import Flask, Response, json, render_template, request, redirect, url_for, flash, jsonify, make_response
 from flask_login import current_user, login_user, login_required, logout_user
-from models import db, userModel, publicModel, login
+#from models import db, userModel, publicModel, login
 import requests
 import os
 import secrets
@@ -42,7 +42,7 @@ first_request = True
 # Link our user SQLite database with SQLALchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_templates.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+#db.init_app(app)
 menu = ""
 big_menu = ""
 subjects = {}
@@ -57,17 +57,19 @@ for file in file_list:
     subject = os.path.splitext(file)[0]
     subjects[subject] = "present"
     menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
-    big_menu = big_menu + f'<a href="/{subject.replace(" ", "_")}"><div class="section-box">{subject}</div></a>'
 
-#logger.info(data_folder)
+    with open(os.path.join(os.path.join(app.root_path, 'data'), "index.html"), 'r') as file:
+        big_menu = file.read()
+
 
 # Create the database file before the first user request itself
-@app.before_request
+"""@app.before_request
 def create_table():
     global first_request
     if first_request:
         first_request = False
         db.create_all()
+
 
 # Generate a unique ID for templates/modules in database
 def unique_id():
@@ -78,9 +80,9 @@ def unique_id():
         
 
 # Link the login instance to our app 
-login.init_app(app)
-login.login_view = 'login'
-
+#login.init_app(app)
+#login.login_view = 'login'
+"""
 
 def read_news_content(file):
     data_folder = os.path.join(app.root_path, 'data')
