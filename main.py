@@ -55,9 +55,9 @@ file_list = os.listdir(data_folder)
 # Loop over the files
 for file in file_list:
     subject = os.path.splitext(file)[0]
-    subjects[subject] = "present"
-    menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
-
+    if subject != "index":
+        subjects[subject] = "present"
+        menu = menu + f'<div><a href="/{subject.replace(" ", "_")}"><i class="fas"></i>{subject}</a></div>'
     with open(os.path.join(os.path.join(app.root_path, 'data'), "index.html"), 'r') as file:
         big_menu = file.read()
 
