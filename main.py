@@ -1,4 +1,4 @@
-from flask import Flask, Response, json, render_template, request, redirect, url_for, flash, jsonify, make_response
+from flask import Flask, Response, json, render_template, request, redirect, url_for, flash, jsonify, make_response, send_from_directory
 from flask_login import current_user, login_user, login_required, logout_user
 #from models import db, userModel, publicModel, login
 import requests
@@ -32,6 +32,7 @@ app = CustomFlask(__name__, static_folder='static')
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
 first_request = True
+
 
 
 ########################
@@ -104,6 +105,22 @@ def show_page(s):
         return render_template('newsletter.html', title=subject, news_content=news_content, menu=menu)
 
     return f"Page not found {app.root_path}."
+
+@app.route('/kingsrota')
+def serve_calendar():
+    rota_folder = os.path.join(app.root_path, 'rota')
+    rota_path = os.path.join(rota_folder, "kings.ics")
+    
+    with open(rota_path, 'r') as file:
+        rota_content = file.read()
+    
+    return Response(
+        rota_content,
+        content_type='text/calendar',
+        headers={
+            'Content-Disposition': 'inline; filename=kings.ics'
+        }
+    )
 
 
 if __name__ == '__main__':
